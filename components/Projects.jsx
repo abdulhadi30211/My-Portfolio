@@ -12,16 +12,30 @@ const Projects = () => {
   useEffect(() => {
     async function fetchProjects() {
       try {
+        // Check if Supabase is configured
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+        if (!supabaseUrl) {
+          console.warn('Supabase not configured, using empty projects list');
+          setIsLoading(false);
+          return;
+        }
+
         const { data, error } = await supabase
           .from('projects')
           .select('*')
           .eq('is_published', true)
           .order('display_order', { ascending: true });
 
-        if (error) throw error;
-        setProjects(data || []);
+        if (error) {
+          console.error('Error fetching projects:', error.message);
+          // Don't fail completely, just use empty array
+          setProjects([]);
+        } else {
+          setProjects(data || []);
+        }
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error('Unexpected error fetching projects:', error);
+        setProjects([]);
       } finally {
         setIsLoading(false);
       }
