@@ -2,63 +2,37 @@ import { motion } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import SectionalHeading from "./SectionHeading";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { supabase } from "../lib/supabase";
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        // Check if Supabase is configured
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-        if (!supabaseUrl) {
-          console.warn('Supabase not configured, using empty projects list');
-          setIsLoading(false);
-          return;
-        }
-
-        const { data, error } = await supabase
-          .from('projects')
-          .select('*')
-          .eq('is_published', true)
-          .order('display_order', { ascending: true });
-
-        if (error) {
-          console.error('Error fetching projects:', error.message);
-          // Don't fail completely, just use empty array
-          setProjects([]);
-        } else {
-          setProjects(data || []);
-        }
-      } catch (error) {
-        console.error('Unexpected error fetching projects:', error);
-        setProjects([]);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchProjects();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <section id="projects" className="py-20 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 text-center">
-          <SectionalHeading 
-            title="My Projects" 
-            subtitle="Loading amazing projects..." 
-          />
-          <div className="mt-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto"></div>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const projects = [
+    {
+      title: "E-Commerce Platform",
+      description: "A full-featured online store with product listings, cart, and checkout functionality.",
+      tags: ["React", "Node.js", "MongoDB"],
+      github: "#",
+      live: "https://liogi-store.vercel.app/",
+      image: "/3.png",
+      alt: "E-Commerce Platform Screenshot"
+    },
+    {
+      title: "Task Management App",
+      description: "A productivity app for managing tasks with drag-and-drop functionality.",
+      tags: ["Next.js", "Firebase", "Tailwind CSS"],
+      github: "#",
+      live: "https://curriculum-control-center.vercel.app/",
+      image: "/2.png",
+      alt: "Task Management App Screenshot"
+    },
+    {
+      title: "Portfolio Website",
+      description: "A modern portfolio website with animations and dark mode support.",
+      tags: ["React", "Framer Motion", "CSS"],
+      github: "#",
+      live: "https://abdulhadi-portfolio1.vercel.app/",
+      image: "/1.png",
+      alt: "Portfolio Website Screenshot"
+    },
+  ];
 
   return (
     <section id="projects" className="py-20 bg-white dark:bg-gray-900">
