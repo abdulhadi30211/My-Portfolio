@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-    output: 'export',
-  swcMinify: false, // Disable SWC minifier for Node 16
+  output: 'standalone', // Changed from 'export' to 'standalone' for better env support
+  swcMinify: true, // Re-enable SWC minification
   compiler: {
     styledComponents: true
   },
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false };
     return config;
-  }
+  },
+  // Exclude admin pages from static generation if needed
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
 }
