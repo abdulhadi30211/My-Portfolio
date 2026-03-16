@@ -13,6 +13,7 @@ export default function AdminLayout({ children, activeTab = 'dashboard' }: Admin
   const { logout, isAdmin, isLoading } = useAdminAuth();
   const router = useRouter();
 
+  // Show loading state while checking auth
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
@@ -24,8 +25,11 @@ export default function AdminLayout({ children, activeTab = 'dashboard' }: Admin
     );
   }
 
+  // Redirect to login if not authenticated
   if (!isAdmin) {
-    router.push('/admin/login');
+    if (typeof window !== 'undefined') {
+      router.push('/admin/login');
+    }
     return null;
   }
 

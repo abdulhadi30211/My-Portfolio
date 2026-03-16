@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
@@ -27,13 +27,7 @@ export default function EditProject() {
   
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ProjectForm>();
 
-  useEffect(() => {
-    if (query.id) {
-      fetchProject(query.id as string);
-    }
-  }, [query.id]);
-
-  async function fetchProject(id: string) {
+  const fetchProject = useCallback(async (id: string) => {
     try {
       const { data, error } = await supabaseAdmin
         .from('projects')
@@ -60,7 +54,13 @@ export default function EditProject() {
     } finally {
       setIsFetching(false);
     }
-  }
+  }, [reset]);
+
+  useEffect(() => {
+    if (query.id) {
+      fetchProject(query.id as string);
+    }
+  }, [query.id, fetchProject]);
 
   const onSubmit = async (data: ProjectForm) => {
     setError('');

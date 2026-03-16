@@ -5,6 +5,17 @@ module.exports = {
   compiler: {
     styledComponents: true
   },
+  experimental: {
+    workerThreads: true
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ik.imagekit.io'
+      }
+    ]
+  },
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false };
     return config;

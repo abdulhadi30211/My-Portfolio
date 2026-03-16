@@ -30,13 +30,13 @@ const About = () => {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 shadow-sm">
               <h3 className="text-xl font-semibold mb-4 dark:text-white">Who am I?</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                I'm a passionate Frontend Developer with expertise in modern web technologies.
+                I&apos;m a passionate Frontend Developer with expertise in modern web technologies.
                 With experience in building responsive and user-friendly web applications,
                 I love turning ideas into reality through code.
               </p>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 My journey in web development started several years ago, and since then
-                I've been constantly learning and improving my skills. I believe in writing
+                I&apos;ve been constantly learning and improving my skills. I believe in writing
                 clean, efficient, and maintainable code.
               </p>
               

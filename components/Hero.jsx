@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import SocialIcons from "./SocialIcons.jsx";
@@ -42,7 +43,7 @@ const Hero = () => {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-bold mb-6 dark:text-white"
             >
-              Hi, I'm <span className="text-indigo-600 dark:text-indigo-400">AbdulHadi</span>
+              Hi, I&apos;m <span className="text-indigo-600 dark:text-indigo-400">AbdulHadi</span>
             </motion.h1>
 
             <motion.div
@@ -127,13 +128,15 @@ const Hero = () => {
                     👨‍💻
                   </div> */}
                   
-                  <div>
-      <img 
-        src="https://ik.imagekit.io/123e/me3__1_-removebg-preview.png?updatedAt=1748180684807" 
-        alt="Description of image"
-        style={{ width: '300px', borderRadius: '10px' }}
-      />
-    </div>
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="https://ik.imagekit.io/123e/me3__1_-removebg-preview.png?updatedAt=1748180684807"
+                      alt="Profile photo"
+                      fill
+                      className="object-contain rounded-xl"
+                      priority
+                    />
+                  </div>
 
                 </div>
               </div>

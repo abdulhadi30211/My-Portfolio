@@ -271,7 +271,7 @@ export default function AdminDashboard() {
           {projects.length === 0 && (
             <div className="text-center py-12">
               <p className="text-gray-500 dark:text-gray-400">
-                No projects yet. Click "Add New Project" to get started.
+                No projects yet. Click &quot;Add New Project&quot; to get started.
               </p>
             </div>
           )}
